@@ -12,11 +12,10 @@ request = youtube.search().list(
   maxResults='10'
   )
 
-# storing search api's response in a CSV
 response = request.execute()
 
 search_data = []
-comments= []
+#Sending a request to fetch top comments on each video
 for item in response.get('items', []):
   if not item['id'].get('videoId') == None:
     video_id = item['id'].get('videoId')
@@ -26,28 +25,31 @@ for item in response.get('items', []):
     maxResults=10
   )
 
+
+
+#storing video data on into a dict per video
   comment_res = comment_request.execute()
+  comments= []
   for comment in comment_res.get('items', []):
-    comment_data = {
-      'kind': comment['kind'],
-      'top_comments': comment['snippet'].get('topLevelComment').get('snippet').get('textDisplay')
+    comment_text = comment['snippet']['topLevelComment']['snippet']['textDisplay']
+    comments.append(comment_text)
+
+    video_data = {
+      #'kind': item['kind'],
+      'video_id': item['id'].get('videoId'),
+      'channel_title': item['snippet'].get('channelTitle'),
+      'video_published': item['snippet'].get('publishedAt'),
+      'video_title': item['snippet'].get('title'),
+      #'video_thumbnails': item['snippet'].get('thumbnails'), #use thumbnail to rate
+      'video_url': item['snippet'].get('url'),
+      'comments': comments
     }
-    comments.append(comment_data)
-  video_data = {
-    'kind': item['kind'],
-    'video_id': item['id'].get('videoId'),
-    'channel': item['snippet'].get('channelId'),
-    'channel_title': item['snippet'].get('channelTitle'),
-    'video_published': item['snippet'].get('publishedAt'),
-    'video_title': item['snippet'].get('title'),
-    'video_thumbnails': item['snippet'].get('thumbnails'),
-    'video_url': item['snippet'].get('url'),
-    'comments': comments
-  }
+    video_title = item['snippet'].get('title')
   search_data.append(video_data)
 
-df = pd.DataFrame([search_data])
-df.to_csv('search_data.csv', index=False)
+#converting dict into a dataframe and exporting to a csv
+df = pd.DataFrame(search_data)
+df.to_csv('gather-data/search_data.csv', index=False)
 
 
 
