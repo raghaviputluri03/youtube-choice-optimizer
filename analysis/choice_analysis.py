@@ -21,8 +21,31 @@ for index, row in df.iterrows():
     #add a rating to each row
     #at the end return the top 3 ratings
 
-# learn sentimental analysis beginner's version (watch 1 video)
+#learn sentimental analysis/preference matching beginner's version
+    """
+    idea: go through each comment, clean up filter words like "the, and, you"
+            etc. and then see if the learning preferences of users matches any of
+            the comment's. Keep a count per video and videos with the 3 highest
+            counts of matching words from comments are returned
+                - maybe use sentiment analysis to find how well they match
+                the preferance words?
+                (easiest but might take long?)
+                - start with NLTK and Scikit-learn to pre-process text
+                    - removing stop words
+                - go into TF-IDF Vectorizer and cosine similarity to rank
+                  matches between user preferences and comments
+    """
 # map out how it can work for this project
+    """
+    step 1: tokenize user preferences into a list and pre-process (today)
+    step 2: pre-process comments (remove stopwords, filter words, emojis) (today)
+
+    step 3: check if comments match preference words
+              - if yes: increase pref_counter of each video by # and store
+    step 4: gather counts for all videos, sort the videos by count, and take the
+    first 3
+    step 5: return first 3
+    """
 
 #rate each video's data
     #add to a top three array
