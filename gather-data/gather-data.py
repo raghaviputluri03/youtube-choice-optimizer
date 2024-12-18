@@ -7,9 +7,10 @@ youtube = build('youtube', 'v3', developerKey=key.key)
 
 # requesting Search API to search for top 10 videos for a given query
 request = youtube.search().list(
-  part='snippet',
+  part='id,snippet',
   q='Learn Java',
-  maxResults='10'
+  maxResults='10',
+  type='video'
   )
 
 response = request.execute()
@@ -17,12 +18,12 @@ response = request.execute()
 search_data = []
 #Sending a request to fetch top comments on each video
 for item in response.get('items', []):
-  if not item['id'].get('videoId') == None:
-    video_id = item['id'].get('videoId')
+  if item['id']['kind'] == 'youtube#video':
+    video_id = item['id']['videoId']
   comment_request = youtube.commentThreads().list(
-    part='snippet',
+    part="snippet",
     videoId=video_id,
-    maxResults=10
+    textFormat="plainText"
   )
 
 
@@ -31,7 +32,8 @@ for item in response.get('items', []):
   comment_res = comment_request.execute()
   comments= []
   for comment in comment_res.get('items', []):
-    comment_text = comment['snippet']['topLevelComment']['snippet']['textDisplay']
+    comment_obj = comment["snippet"]["topLevelComment"]
+    comment_text = comment_obj["snippet"]["textDisplay"]
     comments.append(comment_text)
 
     video_data = {

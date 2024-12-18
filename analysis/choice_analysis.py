@@ -10,13 +10,12 @@ be more confident in knowing which videos to watch.
 import csv
 import pandas as pd
 
-user_preferences = ["visual learner", "hands-on learning" , "likes examples"]
-
+user_preferences = "I am a visual learner who likes examples and learn best through hands-on learning"
 df = pd.read_csv('gather-data/search_data.csv')
 
 # Iterate through each row
 for index, row in df.iterrows():
-    print(row)
+    print(row['comments'])
     #each row you go through comments and match learning preferances to the comments
     #add a rating to each row
     #at the end return the top 3 ratings
@@ -41,10 +40,13 @@ for index, row in df.iterrows():
     step 2: pre-process comments (remove stopwords, filter words, emojis) (today)
 
     step 3: check if comments match preference words
-              - if yes: increase pref_counter of each video by # and store
+              - if yes: - Use TF-IDF Vectorizer and cosine similarity to rank videos
     step 4: gather counts for all videos, sort the videos by count, and take the
-    first 3
+            first 3
     step 5: return first 3
+    for later: maybe use sentiment analysis to also compare the negatives and
+              postives of the video.
+
     """
 
 #rate each video's data
