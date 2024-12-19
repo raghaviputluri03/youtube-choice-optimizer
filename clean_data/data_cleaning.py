@@ -80,8 +80,8 @@ for index, row in df.iterrows():
     with open('clean_data/cleaned_data.csv', mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
 
-        # writer.writerow(['video_title', 'comment'])
+        writer.writerow(['video_title', 'comment'])
 
-        # for video_title, comments in video_to_comments.items():
-        #     for comment in comments:
-        #         writer.writerow([video_title, comment])
+        for video_title, comments in video_to_comments.items():
+            for comment in comments:
+                writer.writerow([video_title, comment])
