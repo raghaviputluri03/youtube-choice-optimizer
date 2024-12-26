@@ -14,26 +14,37 @@ import heapq
 from data_cleaning import video_to_comments
 from data_cleaning import cleaned_prefs
 
-video_to_rating = []
-result_arr = []
+def top3_analysis(video_to_comments, cleaned_prefs):
+  video_to_rating = []
+  result_arr = []
 
-pref_arr = " ".join(cleaned_prefs)
+  pref_arr = " ".join(cleaned_prefs)
 
-vectorizer = CountVectorizer()
+  #instance of CountVectorizer
+  vectorizer = CountVectorizer()
 
-for video, comments in video_to_comments.items():
-  comments_arr = " ".join(comments)
+  for video, comments in video_to_comments.items():
+    comments_arr = " ".join(comments)
 
-  comments_vectors = vectorizer.fit_transform([comments_arr])
-  user_input_vector = vectorizer.transform([pref_arr])
+    # fit_transform: fit creates a vocabulary of all unique words
+    # fit_transform: transform: creates a numerical matrix
+      # -> each row is a sentence and each column is a word in the vocab
+      # -> matrix shows the number of times a word appears in each sentence
+    comments_vectors = vectorizer.fit_transform([comments_arr])
+    user_input_vector = vectorizer.transform([pref_arr])
 
-  similarity_scores = cosine_similarity(user_input_vector, comments_vectors)
+    # calculates cosinse similarity between the user's input vector (matrix) against
+      # each of the matricies or vectors formed by the sentences in the original data
+      # results in an array containing the similarity scores per data sentence
+    similarity_scores = cosine_similarity(user_input_vector, comments_vectors)
 
-  heapq.heappush(video_to_rating, (-similarity_scores, video))
+    #creating a max_heap using negative sign to switch the order of min heap
+    heapq.heappush(video_to_rating, (-similarity_scores, video))
 
-for _ in range(3):
-  result_arr.append(heapq.heappop(video_to_rating)[1])
+  # returning the top 3 videos
+  for _ in range(3):
+    result_arr.append(heapq.heappop(video_to_rating)[1])
 
-print(result_arr)
+  return result_arr
 
 
