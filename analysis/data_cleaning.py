@@ -78,7 +78,7 @@ for index, row in df.iterrows():
     video_to_comments[row['video_title']] = cleaned_comments
 
 #store cleaned data into csv
-    with open('clean_data/cleaned_data.csv', mode='w', newline='', encoding='utf-8') as file:
+    with open('cleaned_data.csv', mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
 
         writer.writerow(['video_title', 'comment'])

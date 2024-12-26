@@ -28,7 +28,7 @@ for item in response.get('items', []):
 
 
 
-#storing video data on into a dict per video
+#storing video data into a dict per video
   comment_res = comment_request.execute()
   comments= []
   for comment in comment_res.get('items', []):
