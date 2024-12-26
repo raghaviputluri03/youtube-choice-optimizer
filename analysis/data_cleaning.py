@@ -2,10 +2,9 @@
 File Name: choice_analysis.py
 Author: Raghavi Putluri
 Created: 12/17/2024
-Description: Inputs youtube's top 10 video reccomendations for a given topic
-and analysis the top 3 videos that would be the most useful for a user given
-their specific learning preferances based on comments therefore users can
-be more confident in knowing which videos to watch.
+Description: Inputs user preferences and youtube video comments and
+pre-processess them getting rid of unecessary words and grouping similar
+words together to send to analysis.
 """
 import csv
 import pandas as pd
@@ -26,7 +25,9 @@ df = pd.read_csv('gather-data/search_data.csv')
 stop_words = set(stopwords.words('english'))
 
 cleaned_prefs = []
+vc_dict = {}
 video_to_comments = {}
+
 
 user_pref = """I am a visual learner who likes examples and learn best through
               hands-on learning"""
