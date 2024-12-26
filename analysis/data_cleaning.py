@@ -21,12 +21,9 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk import pos_tag
 
-df = pd.read_csv('data/search_data.csv')
+
 stop_words = set(stopwords.words('english'))
 
-cleaned_prefs = []
-vc_dict = {}
-video_to_comments = {}
 
 
 user_pref = """I am a visual learner who likes examples and learn best through
@@ -72,17 +69,20 @@ def clean_prefs_comments(text):
 # cleaning user_preferences
 cleaned_prefs = clean_prefs_comments(user_pref)
 
-# Iterate through each row and clean comments
-for index, row in df.iterrows():
-    cleaned_comments = clean_prefs_comments(row['comments'])
-    video_to_comments[row['video_title']] = cleaned_comments
+def clean_comments(df):
+    video_to_comments = {}
+    # Iterate through each row and clean comments
+    for index, row in df.iterrows():
+        cleaned_comments = clean_prefs_comments(row['comments'])
+        video_to_comments[row['video_title']] = cleaned_comments
 
-#store cleaned data into csv
-    with open('data/cleaned_data.csv', mode='w', newline='', encoding='utf-8') as file:
-        writer = csv.writer(file)
+    #store cleaned data into csv
+        with open('data/cleaned_data.csv', mode='w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
 
-        writer.writerow(['video_title', 'comment'])
+            writer.writerow(['video_title', 'comment'])
 
-        for video_title, comments in video_to_comments.items():
-            for comment in comments:
-                writer.writerow([video_title, comment])
+            for video_title, comments in video_to_comments.items():
+                for comment in comments:
+                    writer.writerow([video_title, comment])
+    return video_to_comments

@@ -12,8 +12,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import heapq
 
-from data_cleaning import video_to_comments
-from data_cleaning import cleaned_prefs
 
 def top3_analysis(video_to_comments, cleaned_prefs):
   """
