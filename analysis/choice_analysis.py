@@ -2,6 +2,7 @@
 File Name: choice_analysis.py
 Author: Raghavi Putluri
 Created: 12/17/2024
+
 Description: Inputs youtube's top 10 video reccomendations for a given topic
 and analyzes the top 3 videos that would be the most useful for a user given
 their specific learning preferances based on comments. Therefore users can
@@ -15,6 +16,22 @@ from data_cleaning import video_to_comments
 from data_cleaning import cleaned_prefs
 
 def top3_analysis(video_to_comments, cleaned_prefs):
+  """
+    Vectorizes comment data and preference data. Uses cosine similarity to
+    calculate the similarities between each video's comments compared to user
+    preferences. Stores video title and rating on a max heap, returns the top
+    3 videos with most similarity.
+
+    Parameters
+    ----------
+    video_to_comments: dict with video titles mapping to it's comments
+    user_prefs: cleaned array of user preferences
+
+    Returns
+    -------
+    list[]
+        top 3 vidoes in relevance to user prefernces.
+  """
   video_to_rating = []
   result_arr = []
 

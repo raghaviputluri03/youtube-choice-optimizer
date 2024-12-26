@@ -51,7 +51,7 @@ for item in response.get('items', []):
 
 #converting dict into a dataframe and exporting to a csv
 df = pd.DataFrame(search_data)
-df.to_csv('gather-data/search_data.csv', index=False)
+df.to_csv('data/search_data.csv', index=False)
 
 
 

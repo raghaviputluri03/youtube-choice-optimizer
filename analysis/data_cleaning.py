@@ -21,7 +21,7 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk import pos_tag
 
-df = pd.read_csv('gather-data/search_data.csv')
+df = pd.read_csv('data/search_data.csv')
 stop_words = set(stopwords.words('english'))
 
 cleaned_prefs = []
@@ -78,7 +78,7 @@ for index, row in df.iterrows():
     video_to_comments[row['video_title']] = cleaned_comments
 
 #store cleaned data into csv
-    with open('cleaned_data.csv', mode='w', newline='', encoding='utf-8') as file:
+    with open('data/cleaned_data.csv', mode='w', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
 
         writer.writerow(['video_title', 'comment'])
