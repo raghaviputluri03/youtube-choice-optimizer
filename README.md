@@ -8,7 +8,7 @@ using sklearn and assigns a cosine similarity score. The user is then delivered
 with the top 3 videos that match their learning preferences for the query that
 they requested.
 
-This program's goal is to provide an easy decision making process when it comes to choosing which youtube video to watch. Using NLP and ML tools, the program can match a user's specific needs to top 3 videos based on human feedback such as comments. This allows a user to quicly choose which videos to watch without spending time on videos that might not match their interests.
+This terminal run program's goal is to provide an easy decision making process when it comes to choosing which youtube video to watch. Using NLP and ML tools, the program can match a user's specific needs to top 3 videos based on human feedback such as comments. This allows a user to quicly choose which videos to watch without spending time on videos that might not match their interests.
 
 ## main.py
 The user is first prompted in the terminal to provide their youtube search query
