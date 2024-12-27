@@ -1,5 +1,4 @@
 # Youtube Choice Optimizer
-
 The youtube choice optimizer curates and suggests youtube videos that best
 fit your learning preferances by analyzing video comments. This program uses
 the youtube API to search for videos given a user's query and uses nltk's and
@@ -28,15 +27,15 @@ stored in a csv.
 2 functions that clean the comment and user preference data. clean_pref_comments
 function is a general text cleaning function that removes stopwords and
 tokenizes the given text into a list divided by each word or phrase. It uses
-*NLTK*'s *stopwords* and *word_tokenizer* tools to clean and tokenize text. This
-function also utlizes *spaCy's* *dependency parsing* tool to group similar words
+**NLTK**'s **stopwords** and **word_tokenizer** tools to clean and tokenize text. This
+function also utlizes **spaCy's** *d*ependency parsing** tool to group similar words
 together such as "visual learner" instead of "visual" , "learner. clean_comments
 function takes the entire corpus of video and comment data and applies
 the clean_pref_comments function to each comment and returns a hashmap of video
 title to cleaned comment data.
 
 ## choice_analysis.py
-top3_analysis function utlizes *sklearn* and it's *CountVectorizer* and
-*cosine_similarity* tools to first vectorize comment data and user preference
+top3_analysis function utlizes **sklearn** and it's **CountVectorizer** and
+**cosine_similarity** tools to first vectorize comment data and user preference
 data. After building the vectors or matricies, it's runs a consine_similarity
 calculation and assigns a similarity score to each video. Each video title and its similarity score is stored in a max_heap. At the end of the calculations, the function returns the top 3 videos in a list.
