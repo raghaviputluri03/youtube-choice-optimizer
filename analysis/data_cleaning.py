@@ -25,11 +25,6 @@ from nltk import pos_tag
 stop_words = set(stopwords.words('english'))
 
 
-
-user_pref = """I am a visual learner who likes examples and learn best through
-              hands-on learning"""
-
-
 def clean_prefs_comments(text):
     """
     Cleans given text by removing stop and filter words. Tokenizes
@@ -66,10 +61,21 @@ def clean_prefs_comments(text):
             #NOTE: remove 'learning' and other head words?
     return combined_prefs
 
-# cleaning user_preferences
-cleaned_prefs = clean_prefs_comments(user_pref)
 
 def clean_comments(df):
+    """
+    Cleans the comment data per video using clean_pref_comments function given
+    a dataframe of search data.
+
+    Parameters
+    ----------
+    df: Video and comment data of all top 10 videos of a given user query.
+
+    Returns
+    -------
+    dict{}:
+        Map that consists of video title and cleaned comment pairs.
+    """
     video_to_comments = {}
     # Iterate through each row and clean comments
     for index, row in df.iterrows():
